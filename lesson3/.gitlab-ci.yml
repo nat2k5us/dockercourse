@@ -1,0 +1,40 @@
+stages:
+  - build
+  - scan
+  - deploy
+  - helm-deploy
+
+# variables:
+  
+# before_script:
+  
+build-docker:
+  stage: build
+  tags:
+    - docker
+  script:
+  - make docker-build
+
+
+scan:
+  stage: scan
+  tags:
+    - scan
+  script:
+  - make scan
+
+
+push-docker:
+  stage: deploy
+  tags:
+    - push
+  script:
+  - make push-docker
+
+
+helm-deploy-docker-desktop:
+  stage: helm-deploy
+  tags:
+    - helm
+  script:
+  - make helm-docker-desktop
